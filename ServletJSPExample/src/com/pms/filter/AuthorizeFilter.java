@@ -53,7 +53,8 @@ public class AuthorizeFilter implements Filter {
 	    	  
 	    	  int i = url.lastIndexOf("/");
 	    	  String action = url.substring(i+1,url.length());
-	    	  if(!"Login.htm".equals(action) && !"Index.jsp".equals(action)){
+	    	  String pattern = action.substring(action.lastIndexOf(".")+1,action.length());
+	    	  if("htm".equals(pattern) && !"Login.htm".equals(action)){
 	    		  HttpSession session = ((HttpServletRequest) request).getSession();
 	    		  Object userName = session.getAttribute("user");
 	    		  if(userName == null || userName.toString().isEmpty()){

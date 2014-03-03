@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		doPost(request, response);
 	}
 
 	/**
@@ -48,6 +48,13 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("In Post");
+		
+		String action = request.getParameter("action");
+		if("LogOut".equals(action)){
+			HttpSession session = request.getSession();
+			session.invalidate();
+			//response.sendRedirect("Index.jsp");
+		}
 		
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");

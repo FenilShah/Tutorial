@@ -30,6 +30,9 @@ $(document).ready(function(){
 </head>
 <body>
 <h1>Page 1</h1>
+<div align="right">
+<a href="Login.htm?action=LogOut">Log out</a>
+</div>
 <form name="userForm" action="UserController.htm?action=SaveUser" method="post">
 <table>
 <tr>

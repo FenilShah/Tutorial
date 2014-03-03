@@ -16,7 +16,7 @@ $(document).ready(function(){
 	while(rs.next()){
 	%>
 	
-		alert("<%= rs.getLong(1) %>");
+		//alert("<%= rs.getLong(1) %>");
 		$('#UserId').val("<%= rs.getLong(1) %>");
 		$('#DisplayName').val("<%= rs.getString(2) %>");
 		$('#EmailId').val("<%= rs.getString(3) %>");
@@ -26,12 +26,17 @@ $(document).ready(function(){
 	}}
 	%>	
 });
+
+function logOut(){
+	//alert("Hello");
+	window.location.replace("Login.htm?action=LogOut");
+}
 </script>
 </head>
 <body>
 <h1>Page 1</h1>
 <div align="right">
-<a href="Login.htm?action=LogOut">Log out</a>
+<a href="#" onclick="javascript:logOut();">Log out</a>
 </div>
 <form name="userForm" action="UserController.htm?action=SaveUser" method="post">
 <table>

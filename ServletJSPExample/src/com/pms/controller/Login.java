@@ -48,39 +48,39 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("In Post");
-		
+		boolean flag = false;
 		String action = request.getParameter("action");
 		if("LogOut".equals(action)){
 			HttpSession session = request.getSession();
 			session.invalidate();
 			//response.sendRedirect("Index.jsp");
-		}
+		}else{
 		
-		String userId = request.getParameter("userId");
-		String password = request.getParameter("password");
-		boolean flag = false;
-		if(userId != null && !userId.isEmpty() && password != null && !password.isEmpty())
-		{
-			UserManager userManager = new UserManager();
-			ResultSet rs = userManager.verifyUser(userId,password);
-			try {
-				if(rs != null && rs.next()){
-				
-					String userName = rs.getString(1);
-					HttpSession session = request.getSession();
-					session.setAttribute("user", userName);
-					flag= true;
-				
-				}	
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-				 
+			String userId = request.getParameter("userId");
+			String password = request.getParameter("password");
 			
-						
+			if(userId != null && !userId.isEmpty() && password != null && !password.isEmpty())
+			{
+				UserManager userManager = new UserManager();
+				ResultSet rs = userManager.verifyUser(userId,password);
+				try {
+					if(rs != null && rs.next()){
+					
+						String userName = rs.getString(1);
+						HttpSession session = request.getSession();
+						session.setAttribute("user", userName);
+						flag= true;
+					
+					}	
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					 
+				
+							
+			}
 		}
-		
 		if(flag)
 			response.sendRedirect("UserController.htm?action=userAddEdit");
 		else
